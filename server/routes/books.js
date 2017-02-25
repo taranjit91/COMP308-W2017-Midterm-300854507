@@ -1,3 +1,9 @@
+/*
+Name: TARANJIT KAUR
+ID:	  300854507
+App Name: Books
+*/
+
 // modules required for routing
 let express = require('express');
 let router = express.Router();
@@ -29,6 +35,7 @@ router.get('/add', (req, res, next) => {
     /*****************
      * ADD CODE HERE *
      *****************/
+    //renders page for adding new book
  res.render('books/details', {
     title: "Add a new book",
     books: ''
@@ -41,7 +48,7 @@ router.post('/add', (req, res, next) => {
     /*****************
      * ADD CODE HERE *
      *****************/
-   
+    //getting values from form 
 let newBook = book({
       "Title": req.body.title,
       "Description": req.body.description,
@@ -49,7 +56,7 @@ let newBook = book({
       "Author": req.body.author,
       "Genre": req.body.genre
     });
-
+ //add new book 
     book.create(newBook, (err, book) => {
       if(err) {
         console.log(err);
@@ -70,7 +77,7 @@ router.get('/:id', (req, res, next) => {
       // get a reference to the id from the url
       let id = mongoose.Types.ObjectId.createFromHexString(req.params.id);
 
-        // find one book by its id
+        // finding  book by its id
       book.findById(id, (err, books) => {
         if(err) {
           console.log(err);
@@ -85,7 +92,7 @@ router.get('/:id', (req, res, next) => {
       });
     } catch (err) {
       console.log(err);
-     // res.redirect('/errors/404');
+    
     }
 });
 
@@ -95,7 +102,7 @@ router.post('/:id', (req, res, next) => {
     /*****************
      * ADD CODE HERE *
      *****************/
- let id = req.params.id;
+ let id = req.params.id; // get id of the book
 
      let updatedBook = book({
        "_id": id,
@@ -117,7 +124,7 @@ router.post('/:id', (req, res, next) => {
     });
 });
 
-// GET - process the delete by user id
+// GET - process the delete by book id
 router.get('/delete/:id', (req, res, next) => {
 
     /*****************
